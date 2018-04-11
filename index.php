@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>CSS Grid Calculator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet"/>
 
 
@@ -14,60 +14,76 @@
   <body>
 	  
 	<div class="container">
-	  <div class="row">
-		<div class="col">
-			<form>
-			  <div class="form-group">
-				<label for="larguraSite">Largura do site</label>
-				<input type="text" class="form-control calcularGrid" id="larguraSite" aria-describedby="larguraSiteHint" placeholder="Largura do site">
-				<small id="larguraSiteHint" class="form-text text-muted">Largura do site em px.</small>
-			  </div>
-			  
-			  <div class="form-group">
-				<label for="quantidadeColunas">Quantidade de colunas</label>
-				<input type="text" class="form-control calcularGrid" id="quantidadeColunas" placeholder="Quantidade de colunas">
-			  </div>
-			  
-			  <div class="form-group">
-				<label for="entreColunas">Entre colunas</label>
-				<input type="text" class="form-control calcularGrid" id="entreColunas" placeholder="Entre colunas">
-			  </div>
+		<h1>Gerador de GRID CSS</h1>
+		<form>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="larguraSite">Largura do site</label>
+						<input type="text" class="form-control calcularGrid" id="larguraSite" aria-describedby="larguraSiteHint" placeholder="Largura do site">
+						<small id="larguraSiteHint" class="form-text text-muted">Largura do site em px.</small>
+					</div>
+				</div>
 
-			  <div class="form-group">
-				<label for="margemExterna">Margem externa</label>
-				<input type="text" class="form-control calcularGrid" id="margemExterna" placeholder="Margem externa">
-			  </div>
-			  
-			  <div class="form-group">
-				<label for="classeCSS">Classe CSS</label>
-				<input type="text" class="form-control calcularGrid" id="classeCSS" placeholder="Margem externa">
-			  </div>
-			</form>
-		</div>
-	  </div>
-	  
-		<div id="" class="row">
-			<div class="col tamanho-coluna">
-			
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="quantidadeColunas">Quantidade de colunas</label>
+						<input type="text" class="form-control calcularGrid" id="quantidadeColunas" placeholder="Quantidade de colunas">
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="entreColunas">Espaço Entre colunas</label>
+						<input type="text" class="form-control calcularGrid" id="entreColunas" placeholder="Entre colunas">
+					</div>
+				</div>
 			</div>
-			<div class="col entre-colunas">
 			
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="margemExterna">Margem externa</label>
+						<input type="text" class="form-control calcularGrid" id="margemExterna" placeholder="Margem externa">
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="classeCSS">Classe CSS</label>
+						<input type="text" class="form-control calcularGrid" id="classeCSS" placeholder="Classe CSS" value="col">
+					</div>
+				</div>
 			</div>
-		</div>
-		</div class="row">
-			<div class="col">
-				<table class="table table-repsonse">
-					<thead>
-						<tr>
-							<th>Largura (px)</th>
-							<th>Largura (%)</th>
-							<th>Classe CSS</th>
-						</tr>
-					</thead>
-					<tbody>
-						
-					</tbody>
-				</table>
+		</form>
+
+		<h2>Grid CSS</h2>
+		<div id="aviso" class="well">O css do grid será gerado automaticamente após preencher todos os campos acima</div>
+		
+		<div id="resultado" style="display:none;">
+			<div id="" class="row">
+				<div class="col-md-6 tamanho-coluna">
+
+				</div>
+				<div class="col-md-6 entre-colunas">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-repsonse">
+						<thead>
+							<tr>
+								<th>Largura (px)</th>
+								<th>Largura (%)</th>
+								<th>Classe CSS</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -85,6 +101,8 @@
 				var classeCSS = $("#classeCSS").val();
 				
 				if (larguraSite && quantidadeColunas && entreColunas && margemExterna){
+					$("#aviso").hide();
+					$("#resultado").show();
 					var entreColunasPercent = "";
 					if (larguraSite && entreColunas){
 						entreColunasPercent = entreColunas/larguraSite*100;
